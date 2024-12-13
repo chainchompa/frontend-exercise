@@ -12,6 +12,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  gap: 1rem;
 }
 
 .pokedex__content {
@@ -23,9 +24,18 @@ body {
 }
 
 .pokedex__search-results {
+  max-height: 60vh;
+  overflow-y: auto;
+  border: 2px solid red;
 }
 
 .pokedex__list-item {
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 0 1rem;
 }
 
 .pokedex__details {
