@@ -47,7 +47,22 @@ When you are finished, please upload your completed work to your Github and invi
 Please take some time to answer the following questions. Your answers should go directly in this `readme`.
 
 - Given more time, what would you suggest for improving the performance of this app?
+    - Use something like React Query for fetching, caching, and revalidating data
+    - Add useMemo and useCallback to optimize performance, especially for the details card and evolution chain
+    - Loading state for the search results and details card using React Suspense
+    - Pagination for the search results or fetching limited results and fetching more data on scroll
+    - Error handling for the data fetching
 
 - Is there anything you would consider doing if we were to go live with this app?
+    - Converting to TypeScript for type safety and better developer experience
+    - Update evolutions to be links that navigate to the details of the evolution
+    - Filtering and sorting the search results by type, move, generation, etc.
+    - Responsive Design, would also be nice to use Tailwind and have more consistent styling
+    - Unit Tests
+    - No 2px red solid borders
+    - Would add ESLint and Prettier for code consistency
+    - Making the UI more accessible and adding aria labels
 
 - What was the most challenging aspect of this work for you (if at all)?
+    - Following the instructions and making the UI match the mockup instead of having fun with it
+    - Took a second for me to realize that the evolution-chain endpoint uses the id of the pokemon species, not the pokemon
