@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchAllPokemon } from "./api";
+import { fetchAllPokemon, fetchPokemonDetailsByName, fetchEvolutionChainById, fetchPokemonSpeciesByName } from "./api";
 
 function App() {
     const [pokemonIndex, setPokemonIndex] = useState([])
@@ -29,8 +29,34 @@ function App() {
         )
     }
 
+    const getEvolutionChain = (evolutionData) =>{
+        const evolutions = [];
+        let evolutionChain = evolutionData.chain;
+        
+        evolutions.push(evolutionChain.species.name);
+        
+        while (evolutionChain.evolves_to?.[0]) {
+            evolutionChain = evolutionChain.evolves_to[0];
+            evolutions.push(evolutionChain.species.name);
+        }
+        
+        return evolutions;
+    }
+
     const onGetDetails = (name) => async () => {
-        /** code here **/
+        const details = await fetchPokemonDetailsByName(name);
+        const species = await fetchPokemonSpeciesByName(name);
+        
+        const evolutionChainId = species.evolution_chain.url.match(/\/(\d+)\/?$/)[1];
+        const evolutionData = await fetchEvolutionChainById(evolutionChainId);
+        
+        const transformedDetails = {
+            ...details,
+            moves: details.moves.slice(0, 4),
+            evolutions: getEvolutionChain(evolutionData)
+        };
+        
+        setPokemonDetails(transformedDetails);
     }
 
     return (
@@ -62,7 +88,17 @@ function App() {
                 {
                     pokemonDetails && (
                         <div className={'pokedex__details'}>
-                            {/*  code here  */}
+                            <p>{pokemonDetails.name}</p>
+                            <p>Types</p>
+                            <ul>{pokemonDetails.types.map(type => (<li key={type.type.name}>{type.type.name}</li>))}</ul>
+                            <p>Moves</p>
+                            <ul>{pokemonDetails.moves.map(move => (<li key={move.move.name}>{move.move.name}</li>))}</ul>
+                            {pokemonDetails.evolutions && pokemonDetails.evolutions.length > 0 && (
+                               <>
+                                <p>Evolutions</p>
+                                <ul>{pokemonDetails.evolutions.map(evolution => (<li key={evolution}>{evolution}</li>))}</ul>
+                               </>
+                            )}
                         </div>
                     )
                 }
