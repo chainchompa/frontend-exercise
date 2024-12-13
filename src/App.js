@@ -85,23 +85,44 @@ function App() {
                         <p>No Results Found</p>
                     </div>
                 )}
-                {
-                    pokemonDetails && (
-                        <div className={'pokedex__details'}>
-                            <p>{pokemonDetails.name}</p>
-                            <p>Types</p>
-                            <ul>{pokemonDetails.types.map(type => (<li key={type.type.name}>{type.type.name}</li>))}</ul>
-                            <p>Moves</p>
-                            <ul>{pokemonDetails.moves.map(move => (<li key={move.move.name}>{move.move.name}</li>))}</ul>
-                            {pokemonDetails.evolutions && pokemonDetails.evolutions.length > 0 && (
-                               <>
-                                <p>Evolutions</p>
-                                <ul>{pokemonDetails.evolutions.map(evolution => (<li key={evolution}>{evolution}</li>))}</ul>
-                               </>
-                            )}
+                {pokemonDetails && (
+                    <div className={'pokedex__details'}>
+                        <h2>{pokemonDetails.name}</h2>
+                        
+                        <div className="pokedex__details-section">
+                        <div className="pokedex__details-types">
+                            <h3>Types</h3>
+                            <ul className="pokedex__details-list">
+                                {pokemonDetails.types.map(type => (
+                                    <li key={type.type.name}>{type.type.name}</li>
+                                ))}
+                            </ul>
                         </div>
-                    )
-                }
+
+                        <div className="pokedex__details-moves">
+                            <h3>Moves</h3>
+                            <ul className="pokedex__details-list">
+                                {pokemonDetails.moves.map(move => (
+                                    <li key={move.move.name}>{move.move.name}</li>
+                                ))}
+                            </ul>
+                        </div>
+                        </div>
+
+                        {pokemonDetails.evolutions && (
+                            <div className="pokedex__details-evolutions">
+                                <h3>Evolutions</h3>
+                                <div className="pokedex__evolution-chain">
+                                    {pokemonDetails.evolutions.map((evolution, index) => (
+                                        <p key={evolution}>
+                                            {evolution}
+                                        </p>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );
