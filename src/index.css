@@ -25,6 +25,13 @@ body {
   max-height: 60vh;
   overflow-y: auto;
   border: 2px solid red;
+  border-radius: 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.pokedex__search-results::-webkit-scrollbar {
+  display: none;
 }
 
 .pokedex__list-item {
