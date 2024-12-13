@@ -39,20 +39,24 @@ function App() {
                 <input value={searchValue} onChange={onSearchValueChange} placeholder={'Search Pokemon'}/>
             </div>
             <div className={'pokedex__content'}>
-                {pokemon.length > 0 && (
+                {pokemon.length > 0 ? (
                     <div className={'pokedex__search-results'}>
                         {
                             pokemon.map(monster => {
                                 return (
                                     <div className={'pokedex__list-item'} key={monster.name}>
-                                        <div>
+                                        <p>
                                             {monster.name}
-                                        </div>
+                                        </p>
                                         <button onClick={onGetDetails(monster.name)}>Get Details</button>
                                     </div>
                                 )
                             })
                         }
+                    </div>
+                ) : (
+                    <div className={'pokedex__no-results'}>
+                        <p>No Results Found</p>
                     </div>
                 )}
                 {
